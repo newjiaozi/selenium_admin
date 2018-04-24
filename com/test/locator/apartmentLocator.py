@@ -34,8 +34,23 @@ class ApartmentLocator(MainPageLocator):
 
     ADD_CLASS = (By.CLASS_NAME,"department-add")
 
+    ## 分配角色
+    ROLE_APPLY_DATA =(By.XPATH,'//*[@id="userallotPage"]/div/div')  ## 角色名称数据
+    ROLE_APPLY_DATA_SPAN = (By.TAG_NAME,'span')
+    ROLE_APPLY_DATA_DIV = (By.TAG_NAME,'div')
+    ROLE_APPLY_CONFIRM = (By.CLASS_NAME,"layui-layer-btn0")   ## 分配角色
+    ROLE_APPLY_CANCEL = (By.CLASS_NAME,"layui-layer-btn1")
 
-
+    ## 查询用户
+    CHECK_USER_DATA = (By.XPATH,'/html/body/div/div')
+    CHECK_USER_DIV = (By.TAG_NAME,'div')
+    CHECK_USER_SPAN = (By.TAG_NAME,'span')
+    CHECK_USER_ADD_USRE_INPUT = (By.NAME,'userAdmin')    ## 用户输入处
+    CHECK_USER_SEARCH_USER = (By.CLASS_NAME,'searchUser')  ## 查询用户 按键
+    CHECK_USER_REAL_NAME = (By.NAME,'realName')   ## 查询后展示的结果
+    CHECK_USER_ADD_USER_COMMIT = (By.CLASS_NAME,'userAdd')   ##添加 按钮
+    CHECK_USER_DELETE = (By.CLASS_NAME,"layui-layer-btn0")   ## 删除
+    CHECK_USER_CANCEL = (By.CLASS_NAME,"layui-layer-btn1")   ## 取消
 
 class AddApartmentLocator(ApartmentLocator):
 

@@ -7,3 +7,10 @@ class LoginLocator(MainPageLocator):
     PASSWORD = (By.XPATH,'//*[@id="password"]')
     IMAGECODE = (By.XPATH, '//*[@id="code"]')
     SUBMIT = (By.XPATH,'//*[@id="login"]')
+    CAPTCHAID = (By.ID,'captchaId')
+    CODE = (By.ID,'globalCode')
+    SLIDE = (By.ID,'isSlide')
+
+    LOGOUT_DL = (By.XPATH,'/html/body/div[1]/div[1]/div[3]/div/dl')
+    LOGOUT_BTN = (By.LINK_TEXT,'退出登录')
+    LOGOUT_CONFIRM = (By.CLASS_NAME,'layui-layer-btn0')

@@ -1,20 +1,10 @@
 import unittest
 from com.test.testsuites.baseTestCase import BaseTestCase
-from selenium import webdriver
-from com.test.pageOperation.loginPage import Login
-from com.test.pageOperation.userManage import UserManagePage as UMP
 import sys
 
 class UserManageTest(BaseTestCase):
-
-    @classmethod
-    def setUpClass(cls):
-        cls.driver = webdriver.Firefox()
-        cls.driver.maximize_window()
-        cls.driver.get(cls.URL)
-        cls.driver.implicitly_wait(10)
-        cls.UMP = UMP(cls.driver)
-        Login(cls.driver).login('liudonglin', '1988@ooOO')
+    case_name = '用户管理'
+    # firefox = True
 
     def test_01_isRightPage(self):
         self.assertTrue(self.UMP.is_right_page())
@@ -32,6 +22,7 @@ class UserManageTest(BaseTestCase):
         self.assertEqual(self.UMP.searchByLoginName('liudonglin1@maizijf.com'),2)
 
     def test_06_AddUserNameBlank(self):
+        self.UMP.refreshData()
         self.assertTrue(self.UMP.addUser(alert='必填项不能为空',snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name))
 
     def test_07_AddUserLoginNameBlank(self):
@@ -62,21 +53,17 @@ class UserManageTest(BaseTestCase):
         self.UMP.refreshData()
         self.assertTrue(self.UMP.addUser(name='锅',loginname='guobaorou',passwd='guobaorou',repasswd='guobaorou',mail='guobaorou@gbr.com',mobile='13612341234',apartment='麦子金服-麦子金服',alert='姓名长度2-20',snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name))
 
-
     def test_14_AddUserName2Long(self):
         self.UMP.refreshData()
         self.assertTrue(self.UMP.addUser(name='锅'*21,loginname='guobaorou',passwd='guobaorou',repasswd='guobaorou',mail='guobaorou@gbr.com',mobile='13612341234',apartment='麦子金服-麦子金服',long_size={"name":20},close=False,snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name))
-
 
     def test_15_AddUserLoginName2Short(self):
         self.UMP.refreshData()
         self.assertTrue(self.UMP.addUser(name='锅包肉',loginname='guoba',passwd='guobaorou',repasswd='guobaorou',mail='guobaorou@gbr.com',mobile='13612341234',apartment='麦子金服-麦子金服',alert='登录名长度6-20',snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name))
 
-
     def test_16_AddUserLoginName2Long(self):
         self.UMP.refreshData()
         self.assertTrue(self.UMP.addUser(name='锅包肉',loginname='g'*21,passwd='guobaorou',repasswd='guobaorou',mail='guobaorou@gbr.com',mobile='13612341234',apartment='麦子金服-麦子金服',long_size={"loginname":20},close=False,snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name))
-
 
     def test_17_AddUserPasswd2Short(self):
         self.UMP.refreshData()
@@ -128,8 +115,6 @@ class UserManageTest(BaseTestCase):
             self.assertTrue(self.UMP.permissionManage(['超级管理员角色','催收员'],snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name))
 
     ## 修改登录禁止状态
-
-
     def test_51_LoginState2Deny(self):
         self.UMP.refreshData()
         if self.UMP.searchByLoginName('guobaorou') == 1:
@@ -143,7 +128,6 @@ class UserManageTest(BaseTestCase):
             self.assertTrue(self.UMP.changeLoginStatus('1',snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name))
             self.assertTrue(self.UMP.checkStatus('可登录',snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name))
 
-
     ## 删除用户
 
     def test_61_DeleteUser(self):
@@ -152,11 +136,5 @@ class UserManageTest(BaseTestCase):
             self.assertTrue(self.UMP.deleteUserAll(snapshot_name=self.__class__.__name__+sys._getframe().f_code.co_name))
         self.assertEqual(self.UMP.searchByLoginName('guobaorou'),2)
 
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.driver.quit()
-
-
 if __name__ == "__main__":
-    unittest.main()
+    UserManageTest.action('用户管理',UserManageTest)

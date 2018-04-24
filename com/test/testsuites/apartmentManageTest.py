@@ -1,26 +1,15 @@
-import unittest
-from selenium import webdriver
-from com.test.pageOperation.apartmentManage import ApartmentManagePage as AMP
-from com.test.pageOperation.loginPage import Login
 from com.test.testsuites.baseTestCase import BaseTestCase
 import sys
 
 
 class ApartmentManageTest(BaseTestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        cls.driver = webdriver.Firefox()
-        cls.driver.maximize_window()
-        cls.driver.get(cls.URL)
-        cls.driver.implicitly_wait(10)
-        cls.nameTen = "一二三四五六七八九十"
-        cls.apartmentName = "oo自动创建部门oo"
-        cls.AMP = AMP(cls.driver)
-        cls.innerName = "-公司内部部门-"
-        cls.outerName = "-公司外部部门-"
-        cls.modifyName = "测试修改"
-        Login(cls.driver).login('liudonglin','1988@ooOO')
+    nameTen = "一二三四五六七八九十"
+    apartmentName = "oo自动创建部门oo"
+    innerName = "-公司内部部门-"
+    outerName = "-公司外部部门-"
+    modifyName = "测试修改"
+    case_name = '部门管理'
 
     def test_01_defaultDisaplay(self):
         self.assertTrue(self.AMP.is_right_page())
@@ -55,29 +44,33 @@ class ApartmentManageTest(BaseTestCase):
     def test_08create_lowwer_apart(self):
         result = self.AMP.openTopAddPage(apart_name=self.innerName*2,apart_comment=self.nameTen*2,apart_type=1,snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name)
         self.assertTrue(result)
-        self.AMP.addTestData(self.innerName*2,snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name)
+        self.AMP.addTestData(self.innerName*2,toName=self.innerName*2,snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name)
 
     def test_20modify_Apartment(self):
-        result =  self.AMP.openTopAddPage(apart_name=self.modifyName,apart_comment=self.modifyName,snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name)
+        result = self.AMP.openTopAddPage(apart_name=self.modifyName,apart_comment=self.modifyName*2,snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name)
         self.assertTrue(result)
-        self.AMP.modifyApartment(apart_name=self.modifyName,to_parent_name=self.outerName,snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name)
-        self.assertTrue(self.AMP.ifModifySucceed(apart_name=self.modifyName*2,snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name))
+        self.AMP.modifyApartment(apart_name=self.modifyName,to_parent_name=self.modifyName*2,toParentApart='-公司外部部门--一二三四五六七八九十一二三四五六七八九十',snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name)
+        self.assertTrue(self.AMP.ifModifySucceed(apart_name=self.modifyName*2,toParentApart='-公司外部部门--一二三四五六七八九十一二三四五六七八九十',snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name))
 
+    def test_30_ApplyRoleADD(self):
+        self.AMP.applyRole(apartment_name=self.outerName,role_list=['刘东林-测试','刘东林-贷后角色'],snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name)
 
-    def test_21modify_Apartment(self):
+    def test_31_ApplyRoleDel(self):
+        self.AMP.applyRole(apartment_name=self.outerName,role_list=[],snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name)
 
-        self.AMP.modifyApartment(apart_name=self.modifyName,to_parent_name='',snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name)
-        self.assertTrue(self.AMP.ifModifySucceed(apart_name=self.modifyName*2,snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name))
+    def test_40_checkUserHaveNotUser(self):
+        self.AMP.checkApplyUser(apartment_name=self.outerName,user_list=[],addUser=False,snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name)
 
+    def test_41_checkUserAdd(self):
+        self.AMP.checkApplyUser(apartment_name=self.outerName,user_list=['liudonglin@maizijf.com'],addUser=True,snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name)
 
-    def test_30_DeleteApart(self):
-        self.AMP.deleteEveryOne([self.apartmentName,self.innerName,self.apartmentName*5,self.outerName,self.innerName*2,self.modifyName,self.modifyName*2])
+    def test_42_checkUserDel(self):
+        self.AMP.checkApplyUser(apartment_name=self.outerName,user_list=['liudonglin@maizijf.com'],addUser=False,snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name)
 
+    def test_50_DeleteApart(self):
+        self.AMP.deleteEveryOne([self.apartmentName,self.innerName,self.apartmentName*5,self.outerName,self.innerName*2,self.modifyName,self.modifyName*2],snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name)
 
-    @classmethod
-    def tearDownClass(cls):
-        cls.driver.quit()
 
 if __name__ == "__main__":
-    unittest.main()
+    ApartmentManageTest.action('部门管理',ApartmentManageTest)
 

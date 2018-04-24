@@ -7,7 +7,7 @@ class UserLocator(MainPageLocator):
     LOGIN_NAME_INPUT = (By.NAME,'loginName')  # 检索框，登录名
     NAME_INPUT = (By.NAME,'name') #检索框，姓名
     SEARCH_BUTTON = (By.XPATH,'/html/body/div/div[1]/div/div[3]/button[1]')  #查询
-    ADD_BUTTON = (By.XPATH,'//*[@id="btnUserAdd"]')  # 新增用户
+    ADD_BUTTON = (By.ID,'btnUserAdd')  # 新增用户
 
     REFRESH_BUTTON =(By.ID,'refresh') #  右上角刷新
     TABLE_TR = (By.XPATH,'//*[@id="tableUser"]/tbody/tr')  #用户数据所在行
@@ -47,7 +47,7 @@ class UserLocator(MainPageLocator):
     ROLE_APPLY_SAVE_CLASS = (By.CLASS_NAME,'layui-layer-btn0') ## 保存
     ROLE_APPLY_SAVE_CANCEL = (By.LINK_TEXT,"取消")   ###
 
-    LOADING = (By.ID,'layui-layer1') ## loading
+    # LOADING = (By.ID,'layui-layer1') ## loading
 
     FIRST_USER_DATA_PM= (By.XPATH,'//*[@id="tableUser"]/tbody/tr/td[6]/button[2]')  ## 第一条数据的，权限编辑
     FIRST_USER_DATA_CS= (By.XPATH,'//*[@id="tableUser"]/tbody/tr/td[6]/button[3]')  ## 第一条数据的，登录状态修改

@@ -24,6 +24,7 @@ class RoleLocator(MainPageLocator):
     SELECT_QS_MENU = (By.XPATH,'//*[@id="menuList"]/div[1]/table/tbody/tr[1]/td[1]/div/span')   # 菜单中的最左边第一个
     SAVE_SUBMIT = (By.XPATH,'//*[@id="layui-layer1"]/div[3]/a[1]')  #新建角色页面中的 保存
     APART_OPTIONS = (By.XPATH,'/html/body/div/div/div/div[3]/div/div/div/div/dl/dd')  ## 部门
+    MENU_ALL_CHECKBOX = (By.XPATH,'//*[@id="menuList"]/div[1]/table/tbody/tr')  ## 确认所有权限菜单展示完成
 
     MENU_LIST_DIV = (By.CLASS_NAME,'layui-form-checkbox')
     MENU_LIST_DIV_SPAN = (By.XPATH,'//div[@lay-skin="primary"]span')
@@ -32,14 +33,16 @@ class RoleLocator(MainPageLocator):
 
     MENU_LIST_A = (By.LINK_TEXT,'%s')
 
+    MENU_LIST_TITLE = (By.XPATH,'/html/body/div/div/div/div[5]/ul/li')
+
 
 
     ### 管理角色用户
     INNTER_IRFAME = "layui-layer-iframe1"
     FIRST_USER = (By.XPATH,'/html/body/div/div/div[1]/span')
     HAVE_NOT_USER = (By.XPATH,'/html/body/div/div')  ## text为 此角色没有绑定用户！
-    CANCEL_BITTON_USER = (By.XPATH,'//*[@id="layui-layer1"]/div[3]/a[2]')
-    DELETE_BITTON_USER = (By.XPATH,'//*[@id="layui-layer1"]/div[3]/a[1]')
+    CANCEL_BITTON_USER = (By.LINK_TEXT,'取消')
+    DELETE_BITTON_USER = (By.LINK_TEXT,'删除')
     ROLE_USER_SPAN = (By.TAG_NAME, 'span')
 
     ### 修改权限
@@ -56,4 +59,4 @@ class RoleLocator(MainPageLocator):
 
 
 
-    LOADING = (By.ID,'layui-layer1') ## loading
+    # LOADING = (By.ID,'layui-layer1') ## loading
