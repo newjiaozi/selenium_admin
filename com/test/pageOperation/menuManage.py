@@ -11,6 +11,7 @@ class MenuManagePage(BasePage):
         self.waitStringinPagesource("<title>菜单管理</title>")
         self.waitAllElementPresent(ML.MENU_DATA_TR)
         self.waitElementClick(ML.MENU_DATA_FIRST_LINE_ADD)
+        self.waitLoading()
         self.switchToInnerFrame()
         self.waitStringinPagesource('<title>添加菜单 </title>')
         self.findElement(ML.ADD_SYSTEM_NAME).clear()
@@ -22,8 +23,11 @@ class MenuManagePage(BasePage):
             self.waitElementClick(ML.ADD_SYSTEM_APART)
             for dd in dds:
                 if dd.text == apartment:
+                    self.driver.execute_script('arguments[0].scrollIntoView()', dd)
+
                     dd.click()
                     break
+
         if alert:
             self.switchToParentFrame()
             self.waitElementClick(ML.ADD_CONFIRM)
@@ -38,7 +42,7 @@ class MenuManagePage(BasePage):
             self.waitElementClick(ML.ADD_CONFIRM)
             self.switchToOuterFrame()
             self.waitStringinPagesource('数据添加成功')
-            self.saveScreenshot(snapshot_name)
+            self.saveScreenshot(snapshot_name+'数据添加成功')
             return self.waitStringNotinPagesource('数据添加成功')
 
     def addMenu(self,system_name='',name='',remark='',apartment='',snapshot_name='',alert=''):
@@ -48,7 +52,10 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == system_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 self.findElementFromEle(tr,ML.TR_TD_BTN).click()
+                self.waitLoading()
                 break
 
         self.switchToInnerFrame()
@@ -63,6 +70,8 @@ class MenuManagePage(BasePage):
             self.waitElementClick(ML.ADD_MENU_APART)
             for dd in dds:
                 if dd.text == apartment:
+                    self.driver.execute_script('arguments[0].scrollIntoView()', dd)
+
                     dd.click()
                     break
         self.switchToParentFrame()
@@ -77,7 +86,7 @@ class MenuManagePage(BasePage):
         else:
             self.switchToOuterFrame()
             self.waitStringinPagesource('数据添加成功')
-            self.saveScreenshot(snapshot_name)
+            self.saveScreenshot(snapshot_name+'数据添加成功')
             return self.waitStringNotinPagesource('数据添加成功')
 
     def addPage(self,system_name='',menu_name='',name='',target='',remark='',apartment='',snapshot_name='',alert=''):
@@ -87,6 +96,8 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == system_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 tr.click()
                 break
 
@@ -94,7 +105,10 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == menu_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 self.findElementFromEle(tr,ML.TR_TD_BTN).click()
+                self.waitLoading()
                 break
         self.switchToInnerFrame()
         self.waitStringinPagesource('<title>添加菜单 </title>')
@@ -110,6 +124,8 @@ class MenuManagePage(BasePage):
             self.waitElementClick(ML.ADD_PAGE_APART)
             for dd in dds:
                 if dd.text == apartment:
+                    self.driver.execute_script('arguments[0].scrollIntoView()', dd)
+
                     dd.click()
                     break
         self.switchToParentFrame()
@@ -123,7 +139,7 @@ class MenuManagePage(BasePage):
         else:
             self.switchToOuterFrame()
             self.waitStringinPagesource('数据添加成功')
-            self.saveScreenshot(snapshot_name)
+            self.saveScreenshot(snapshot_name+'数据添加成功')
             return self.waitStringNotinPagesource('数据添加成功')
 
     def addInterface(self,system_name='',menu_name='',page_name='',name='',target='',remark='',apartment='',snapshot_name='',alert=''):
@@ -133,6 +149,8 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == system_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 tr.click()
                 break
 
@@ -140,6 +158,8 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == menu_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 tr.click()
                 break
 
@@ -148,7 +168,10 @@ class MenuManagePage(BasePage):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             ##print(td1.text,'####')
             if td1.text == page_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 self.findElementFromEle(tr,ML.TR_TD_BTN).click()
+                self.waitLoading()
                 break
 
         self.switchToInnerFrame()
@@ -165,6 +188,8 @@ class MenuManagePage(BasePage):
             self.waitElementClick(ML.ADD_INTERFACE_APART)
             for dd in dds:
                 if dd.text == apartment:
+                    self.driver.execute_script('arguments[0].scrollIntoView()', dd)
+
                     dd.click()
                     break
         self.switchToParentFrame()
@@ -178,7 +203,7 @@ class MenuManagePage(BasePage):
         else:
             self.switchToOuterFrame()
             self.waitStringinPagesource('数据添加成功')
-            self.saveScreenshot(snapshot_name)
+            self.saveScreenshot(snapshot_name+'数据添加成功')
             return self.waitStringNotinPagesource('数据添加成功')
 
     def modifySystem(self,system_name='',name='',remark='',apartment='',snapshot_name='',alert=''):
@@ -188,7 +213,9 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == system_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
                 self.findElementsFromEle(tr,ML.TR_TD_BTN)[1].click()
+                self.waitLoading()
                 break
 
         self.switchToInnerFrame()
@@ -208,6 +235,7 @@ class MenuManagePage(BasePage):
             self.waitElementClick(ML.ADD_SYSTEM_APART)
             for dd in dds:
                 if dd.text == apartment:
+                    self.driver.execute_script('arguments[0].scrollIntoView()', dd)
                     dd.click()
                     break
         else:
@@ -238,6 +266,7 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == system_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
                 tr.click()
                 break
 
@@ -245,7 +274,9 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == menu_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
                 self.findElementsFromEle(tr,ML.TR_TD_BTN)[1].click()
+                self.waitLoading()
                 break
         self.switchToInnerFrame()
         self.waitStringinPagesource('<title>编辑菜单 </title>')
@@ -266,6 +297,7 @@ class MenuManagePage(BasePage):
             self.waitElementClick(ML.ADD_MENU_APART)
             for dd in dds:
                 if dd.text == apartment:
+                    self.driver.execute_script('arguments[0].scrollIntoView()', dd)
                     dd.click()
                     break
 
@@ -296,6 +328,8 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == system_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 tr.click()
                 break
 
@@ -303,6 +337,8 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == menu_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 tr.click()
                 break
 
@@ -310,7 +346,10 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == page_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 self.findElementsFromEle(tr,ML.TR_TD_BTN)[1].click()
+                self.waitLoading()
                 break
 
         self.switchToInnerFrame()
@@ -333,6 +372,8 @@ class MenuManagePage(BasePage):
             self.waitElementClick(ML.ADD_PAGE_APART)
             for dd in dds:
                 if dd.text == apartment:
+                    self.driver.execute_script('arguments[0].scrollIntoView()', dd)
+
                     dd.click()
                     break
 
@@ -364,6 +405,8 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == system_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 tr.click()
                 break
 
@@ -371,6 +414,8 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == menu_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 tr.click()
                 break
 
@@ -378,14 +423,19 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == page_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 tr.click()
                 break
 
         trs = self.waitAllElementPresent(ML.MENU_DATA_TR)
         for tr in reversed(trs):
-            tr1 = self.findElementFromEle(tr,ML.TR_TD)
+            td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == interface_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 self.findElementsFromEle(tr,ML.TR_TD_BTN)[1].click()
+                self.waitLoading()
                 break
 
         self.switchToInnerFrame()
@@ -408,6 +458,8 @@ class MenuManagePage(BasePage):
             self.waitElementClick(ML.ADD_INTERFACE_APART)
             for dd in dds:
                 if dd.text == apartment:
+                    self.driver.execute_script('arguments[0].scrollIntoView()', dd)
+
                     dd.click()
                     break
 
@@ -438,6 +490,8 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == system_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 tr.click()
                 break
 
@@ -445,6 +499,8 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == menu_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 tr.click()
                 break
 
@@ -452,6 +508,8 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == page_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 tr.click()
                 break
 
@@ -459,6 +517,8 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == interface_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 self.findElementsFromEle(tr,ML.TR_TD_BTN)[2].click()
                 break
 
@@ -478,6 +538,8 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == system_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 tr.click()
                 break
 
@@ -485,6 +547,8 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == menu_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 tr.click()
                 break
 
@@ -492,6 +556,8 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == page_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 self.findElementsFromEle(tr,ML.TR_TD_BTN)[2].click()
                 break
 
@@ -511,6 +577,8 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == system_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 tr.click()
                 break
 
@@ -518,6 +586,8 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == menu_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 self.findElementsFromEle(tr,ML.TR_TD_BTN)[2].click()
                 break
 
@@ -536,6 +606,8 @@ class MenuManagePage(BasePage):
         for tr in reversed(trs):
             td1 = self.findElementFromEle(tr,ML.TR_TD)
             if td1.text == system_name:
+                self.driver.execute_script('arguments[0].scrollIntoView()', tr)
+
                 self.findElementsFromEle(tr,ML.TR_TD_BTN)[2].click()
                 break
 

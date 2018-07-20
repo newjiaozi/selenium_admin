@@ -52,13 +52,13 @@ class BaseTestCase(unittest.TestCase):
 
     @classmethod
     def action(cls,result_name,testcase):
-        print('Action...',testcase.__name__)
+        print(testcase.__name__,'Start...')
         if isinstance(testcase,type(BaseTestCase)):
             suite = unittest.TestLoader().loadTestsFromTestCase(testcase)  ##
             with open('/Users/liudonglin/PycharmProjects/selenium_admin/com/test/report/%s-测试报告.html' % result_name,'wb') as f:
                 runner = HTMLTestRunner.HTMLTestRunner(stream=f,title='测试报告',description='测试报告 详细信息')
                 runner.run(suite)
-                print('End...',testcase.__name__)
+                print(testcase.__name__,'End...',)
         else:
             print('*****************')
 

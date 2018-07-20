@@ -1,4 +1,3 @@
-import unittest
 from com.test.testsuites.apartmentManageTest import ApartmentManageTest
 from com.test.testsuites.loginLogManageTest import LoginLogManageTest
 from com.test.testsuites.logManageTest import LogManageTest
@@ -33,25 +32,25 @@ from multiprocessing import Pool
 #         runner.run(suite)
 
 
+
 if __name__ == "__main__":
 
     testcases = [
-        ApartmentManageTest, # C
-        LoginLogManageTest, # F
-        LogManageTest,    # F
-        MenuManageTest,    #F
-        RoleManageTest,    # C
+        # MenuManageTest,  # F
+        # ProcedureTest,  # C
+        # ApartmentManageTest, # C
+        # LoginLogManageTest, # F
+        # LogManageTest,    # F
+        # RoleManageTest,    # C
         UserManageTest,    # F
-        ProcedureTest,     # C
     ]
-    pool = Pool(2)
+    pool = Pool(1)
     for testcase in testcases:
         pool.apply_async(func=testcase.action,args=(testcase.case_name,testcase))
 
     pool.close()
     pool.join()
-    print('ALL DONE '*20)
-
+    print('*** ALL DONE ***'*20)
 
 
 

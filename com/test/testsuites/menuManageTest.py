@@ -10,7 +10,6 @@ class MenuManageTest(BaseTestCase):
     def test_01_isRightPage(self):
         self.assertTrue(self.MMP.is_right_page())
 
-
     def test_02_addSystem(self):
         self.MMP.refreshToMenuManage()
         self.assertTrue(self.MMP.addSystem(name='测试--系统',remark='备注',apartment='',snapshot_name=self.__class__.__name__ + sys._getframe().f_code.co_name))
@@ -27,7 +26,6 @@ class MenuManageTest(BaseTestCase):
     def test_07_addMenuNameBlank(self):
         self.MMP.refreshToMenuManage()
         self.MMP.addMenu(alert='必填项不能为空',system_name='测试--系统',name='',remark='备注',apartment='',snapshot_name=self.__class__.__name__ + sys._getframe().f_code.co_name)
-
 
     def test_12_addPage(self):
         self.MMP.refreshToMenuManage()
@@ -61,7 +59,7 @@ class MenuManageTest(BaseTestCase):
         self.MMP.refreshToMenuManage()
         self.MMP.modifySystem(alert='必填项不能为空',system_name='测试--系统--修改',name='',remark='备注',apartment='麦子金服-麦子金服',snapshot_name=self.__class__.__name__ + sys._getframe().f_code.co_name)
 
-    def test_32_modifySystemDeleteAddApart(self):
+    def test_32_modifySystemAddApart(self):
         self.MMP.refreshToMenuManage()
         self.MMP.modifySystem(system_name='测试--系统--修改',name='测试--系统--修改',remark='备注',apartment='麦子金服-麦子金服',snapshot_name=self.__class__.__name__ + sys._getframe().f_code.co_name)
 

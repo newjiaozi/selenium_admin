@@ -104,7 +104,7 @@ class BasePage():
 
     def waitLoading(self):
         try:
-            WebDriverWait(self.driver,15).until_not(EC.presence_of_element_located(MPL.LOADING),message='等待laoding消失失败') ## 等待
+            WebDriverWait(self.driver,60).until_not(EC.presence_of_element_located(MPL.LOADING),message='等待laoding消失失败') ## 等待
             return True
         except TimeoutException as e:
             print(e.msg,e.stacktrace)
@@ -175,6 +175,8 @@ class BasePage():
         # self.switchToOuterFrame()
         # self.waitElementPresent(MPL.LAYUI_LAYOUT_ADMIN)
         # self.getInQXXT()
+        self.refreshPage()
         self.waitElementClick(lacate)
+        self.waitLoading()
         self.switchToIfame()
         return self.waitStringinPagesource(title_data)

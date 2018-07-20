@@ -40,6 +40,7 @@ class ApartmentManagePage(BasePage):
             self.switchToParentFrame()
             self.waitElementClick(AAL.CONFIRM_BUTTON)
 
+
             if alert_window == 1:
                 self.switchToInnerFrame()  # 切换到添加部门frame
                 if self.waitStringinPagesource("必填项不能为空"):
@@ -47,7 +48,11 @@ class ApartmentManagePage(BasePage):
                     return True
                 else:
                     return False
-            return True
+
+            self.switchToOuterFrame()
+            self.waitStringinPagesource('数据添加成功!')
+            self.saveScreenshot(snapshot_name + '数据添加成功!')
+            return self.waitStringNotinPagesource('数据添加成功!')
         else:
             return False
 
@@ -89,7 +94,12 @@ class ApartmentManagePage(BasePage):
                 self.findElement(AAL.NAME_INPUT).send_keys(to_parent_name)  # '一二三四五六七八九十'*5
                 self.findElement(AAL.COMMENT_INPUT).send_keys(to_parent_name)
                 self.switchToParentFrame()
-                return self.waitElementClick(AAL.CONFIRM_BUTTON)
+                self.waitElementClick(AAL.CONFIRM_BUTTON)
+                self.switchToOuterFrame()
+                self.waitStringinPagesource('数据添加成功!')
+                self.saveScreenshot(snapshot_name + '数据添加成功!')
+                return self.waitStringNotinPagesource('数据添加成功!')
+
             else:
                 return False
         elif operation == 5: ## 修改部门

@@ -1,10 +1,10 @@
 from selenium.webdriver.common.by import By
 
 class MainPageLocator():
-    USER_MANAGE_BUTTON = (By.PARTIAL_LINK_TEXT,"用户管理")
-    MENU_MANAGE_BUTTION=(By.PARTIAL_LINK_TEXT,"菜单管理")
-    ROLE_MANAGE_BUTTON=(By.PARTIAL_LINK_TEXT,"角色管理")
-    APARTMENT_MANAGE_BUTTION = (By.PARTIAL_LINK_TEXT,"部门管理")
+    USER_MANAGE_BUTTON = (By.LINK_TEXT,"用户管理")
+    MENU_MANAGE_BUTTION=(By.LINK_TEXT,"菜单管理")
+    ROLE_MANAGE_BUTTON=(By.LINK_TEXT,"角色管理")
+    APARTMENT_MANAGE_BUTTION = (By.LINK_TEXT,"部门管理")
     LOG_MANAGE_BUTTION = (By.LINK_TEXT,"日志管理")
     LOGIN_LOG_MANAGE_BUTTION = (By.LINK_TEXT,"登录日志管理")
 

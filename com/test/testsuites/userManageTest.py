@@ -1,4 +1,3 @@
-import unittest
 from com.test.testsuites.baseTestCase import BaseTestCase
 import sys
 

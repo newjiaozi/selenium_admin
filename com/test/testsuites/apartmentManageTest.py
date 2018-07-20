@@ -27,7 +27,7 @@ class ApartmentManageTest(BaseTestCase):
         self.assertTrue(result2)
 
     def test_05input_maxsize(self):
-        result = self.AMP.openTopAddPage(apart_name=self.apartmentName*10,apart_chairman=self.nameTen*10,apart_comment=self.nameTen*50)
+        result = self.AMP.openTopAddPage(apart_name=self.apartmentName*10,apart_chairman=self.nameTen*10,apart_comment=self.nameTen*50,snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name)
         self.assertTrue(result)
         self.assertFalse(self.AMP.ifApartmentNameInPage(self.apartmentName*10,snapshot_name = self.__class__.__name__+sys._getframe().f_code.co_name))
 
